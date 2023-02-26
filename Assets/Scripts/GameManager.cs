@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider angerSlider;
     [SerializeField] TMP_Text winningText;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] TMP_Text addedAngerText;
     [SerializeField] GameObject outroManager;
     public float timePlaying = 0;
     public bool isPlaying = false;
@@ -30,8 +31,9 @@ public class GameManager : MonoBehaviour
     {
         ludwigsAnger += anger;
         angerSlider.value = (float)ludwigsAnger / (float)angerToWin;
+        StartCoroutine(DelayedDisapear());
 
-        if(ludwigsAnger >= angerToWin)
+        if (ludwigsAnger >= angerToWin)
         {
             //win
             WinGame();
@@ -41,5 +43,11 @@ public class GameManager : MonoBehaviour
     {
         isPlaying = false;
         outroManager.SetActive(true);
+    }
+    IEnumerator DelayedDisapear()
+    {
+        addedAngerText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        addedAngerText.gameObject.SetActive(false);
     }
 }

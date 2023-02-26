@@ -14,6 +14,7 @@ public class Settings : MonoBehaviour
     [SerializeField] Slider musicVolumeSlider;
     [SerializeField] Slider ludVolumeSlider;
     private bool menuOpen = false;
+    public GameManager gM;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,11 +37,18 @@ public class Settings : MonoBehaviour
         if (menuOpen)
         {
             sliders.SetActive(false);
-            quitButton.SetActive(false);
             menuOpen = false;
             Time.timeScale = 1;
-            Cursor.lockState= CursorLockMode.Locked;
-            Cursor.visible = false;
+            if (gM.isPlaying)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                quitButton.SetActive(false);
+            }
+            else
+            {
+
+            }
         }
         else
         {
